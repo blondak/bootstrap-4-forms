@@ -21,4 +21,14 @@ use Nette\Forms\Controls\SubmitButton;
 class SubmitButtonInput extends SubmitButton
 {
 	use BootstrapButtonTrait;
+
+	public function getControl($caption = NULL)
+	{
+		$control = parent::getControl($caption);
+		$control->setName('button');
+		$control->addHtml($caption ?? $this->caption);
+		$this->addBtnClass($control);
+
+		return $control;
+	}
 }

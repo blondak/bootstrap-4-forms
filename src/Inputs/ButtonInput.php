@@ -25,13 +25,16 @@ class ButtonInput extends Button
 {
 	use BootstrapButtonTrait;
 
+	private $btnValue;
+
 	/**
 	 * ButtonInput constructor.
 	 * @param null|string|Html $content
 	 */
-	public function __construct($content = NULL)
+	public function __construct($content = NULL, $value = null)
 	{
 		parent::__construct($content);
+		$this->btnValue = $value;
 	}
 
 	/**
@@ -41,11 +44,12 @@ class ButtonInput extends Button
 	 */
 	public function getControl($content = NULL)
 	{
-		$btn = Html::el('button', [
-			'type' => 'button',
-			'name' => $this->getHtmlName(),
-		]);
+		$btn = parent::getControl();
+		$btn->setName('button');
 		$btn->setHtml($content === NULL ? $this->caption : $content);
+		if ($this->btnValue) {
+			$btn->setValue($this->btnValue);
+		}
 		$this->addBtnClass($btn);
 
 		return $btn;

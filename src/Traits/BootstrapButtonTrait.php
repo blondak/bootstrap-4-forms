@@ -20,6 +20,8 @@ use Nette\Utils\Html;
  */
 trait BootstrapButtonTrait
 {
+	static $baseBtnClass = 'btn';
+
 	/**
 	 * @var string
 	 */
@@ -49,6 +51,7 @@ trait BootstrapButtonTrait
 	public function getControl($caption = NULL)
 	{
 		$control = parent::getControl($caption);
+		$control->setName('button');
 		$this->addBtnClass($control);
 
 		return $control;
@@ -60,6 +63,6 @@ trait BootstrapButtonTrait
 	protected function addBtnClass($element)
 	{
 		BootstrapUtils::standardizeClass($element);
-		$element->class[] = 'btn ' . $this->getBtnClass();
+		$element->class[] = static::$baseBtnClass . ' ' . $this->getBtnClass();
 	}
 }

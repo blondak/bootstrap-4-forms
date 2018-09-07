@@ -512,6 +512,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 	 */
 	public function renderLabel(Nette\Forms\IControl $control)
 	{
+		if ($control->caption === null) return Html::el();
 		/** @noinspection PhpUndefinedMethodInspection */
 		$controlLabel = $control->getLabel();
 		if ($controlLabel instanceof Html && $controlLabel->getName() == 'label') {

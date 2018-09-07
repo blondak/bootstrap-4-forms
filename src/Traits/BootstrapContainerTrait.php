@@ -37,13 +37,14 @@ trait BootstrapContainerTrait
 	/**
 	 * @param string           $name
 	 * @param null|string|Html $content
-	 * @param string           $btnClass secondary button class (primary is 'btn')
+	 * @param string|null      $btnClass secondary button class (primary is 'btn')
+	 * @param string|null      $btnClass secondary button class (primary is 'btn')
 	 * @return ButtonInput
 	 */
-	public function addButton($name, $content = NULL, $btnClass = 'btn-secondary')
+	public function addButton($name, $content = NULL, $btnClass = null, $value = null)
 	{
-		$comp = new ButtonInput($content);
-		$comp->setBtnClass($btnClass);
+		$comp = new ButtonInput($content, $value);
+		$comp->setBtnClass($btnClass ?? 'btn-secondary');
 		$this->addComponent($comp, $name);
 
 		return $comp;

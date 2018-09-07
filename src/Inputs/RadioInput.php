@@ -49,7 +49,7 @@ class RadioInput extends ChoiceControl implements IValidationInput
 	/**
 	 * Generates control's HTML element.
 	 * @return Html
-	 */
+	 */	
 	public function getControl()
 	{
 		// has to run
@@ -60,6 +60,8 @@ class RadioInput extends ChoiceControl implements IValidationInput
 
 		$c = 0;
 		$htmlId = $this->getHtmlId();
+
+
 		foreach ($items as $value => $caption) {
 			$disabledOption = $this->isValueDisabled($value);
 			$itemHtmlId = $htmlId . $c;
@@ -88,7 +90,8 @@ class RadioInput extends ChoiceControl implements IValidationInput
 				Html::el('label', [
 					'class' => ['custom-control-label'],
 					'for'   => $itemHtmlId,
-				])->setText($caption)
+				])
+				->addHtml($caption)
 			);
 
 			$container->addHtml($wrapper);
