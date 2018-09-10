@@ -39,7 +39,7 @@ class BootstrapRow implements IComponent, IControl
 	 * Global name counter
 	 * @var int
 	 */
-	private static $uidCounter = 0;
+	protected static $uidCounter = 0;
 	/**
 	 * Number of columns in Bootstrap grid. Default is 12, but it can be customized.
 	 * @var int
@@ -48,38 +48,38 @@ class BootstrapRow implements IComponent, IControl
 	/**
 	 * @var string $name
 	 */
-	private $name;
+	protected $name;
 	/**
 	 * Number of columns used by added cells.
 	 * @var int
 	 */
-	private $columnsOccupied = 0;
+	protected $columnsOccupied = 0;
 
 	/**
 	 * Form or container this belong to
 	 * @var Container
 	 */
-	private $container;
+	protected $container;
 	/**
 	 * @var string
 	 */
-	private $gridBreakPoint = 'sm';
+	protected $gridBreakPoint = 'sm';
 	/**
 	 * @var string[]
 	 */
-	private $ownedNames = [];
+	protected $ownedNames = [];
 	/**
 	 * @var BootstrapCell[]
 	 */
-	private $cells = [];
+	protected $cells = [];
 	/**
 	 * @var Html
 	 */
-	private $elementPrototype;
+	protected $elementPrototype;
 	/**
 	 * @var array
 	 */
-	private $options = [];
+	protected $options = [];
 
 	/**
 	 * BootstrapRow constructor.

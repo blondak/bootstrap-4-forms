@@ -43,19 +43,19 @@ class BootstrapCell
 	/**
 	 * @var int
 	 */
-	private $numOfColumns;
+	protected $numOfColumns;
 	/**
 	 * @var IControl|null
 	 */
-	private $childControl;
+	protected $childControl;
 	/**
 	 * @var BootstrapRow
 	 */
-	private $row;
+	protected $row;
 	/**
 	 * @var Html
 	 */
-	private $elementPrototype;
+	protected $elementPrototype;
 
 	/**
 	 * BootstrapRow constructor.

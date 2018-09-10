@@ -235,6 +235,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 			$labelColClass = "col-{$this->labelColumns}";
 			$nonLabelColClass = "col-{$this->controlColumns}";
 		}
+		$labelColClass .= ' col-form-label';
 
 		return [
 			RenderMode::Inline         => [
