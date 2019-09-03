@@ -77,7 +77,7 @@ class BootstrapForm extends Form
 		};
 	}
 
-	public function getElementPrototype()
+	public function getElementPrototype(): Html
 	{
 		return $this->elementPrototype;
 	}
@@ -85,7 +85,7 @@ class BootstrapForm extends Form
 	/**
 	 * @return \Czubehead\BootstrapForms\BootstrapRenderer|\Nette\Forms\IFormRenderer
 	 */
-	public function getRenderer()
+	public function getRenderer(): IFormRenderer
 	{
 		return parent::getRenderer();
 	}

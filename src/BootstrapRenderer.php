@@ -316,10 +316,9 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 	/**
 	 * Provides complete form rendering.
 	 * @param \Nette\Forms\Form $form
-	 * @param null              $mode
 	 * @return string
 	 */
-	public function render(Nette\Forms\Form $form, $mode = NULL)
+	public function render(Nette\Forms\Form $form): string
 	{
 		$this->attachForm($form);
 

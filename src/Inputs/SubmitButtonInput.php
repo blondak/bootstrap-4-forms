@@ -12,7 +12,7 @@ namespace Czubehead\BootstrapForms\Inputs;
 
 use Czubehead\BootstrapForms\Traits\BootstrapButtonTrait;
 use Nette\Forms\Controls\SubmitButton;
-
+use Nette\Utils\Html;
 
 /**
  * Class SubmitButtonInput. Form can be submitted with this.
@@ -22,7 +22,7 @@ class SubmitButtonInput extends SubmitButton
 {
 	use BootstrapButtonTrait;
 
-	public function getControl($caption = NULL)
+	public function getControl($caption = NULL): Html
 	{
 		$control = parent::getControl($caption);
 		$control->setName('button');
