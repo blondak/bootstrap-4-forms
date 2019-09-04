@@ -10,10 +10,11 @@
 namespace Czubehead\BootstrapForms\Inputs;
 
 
+use Nette\Utils\Html;
+use Nette\Forms\Controls\MultiSelectBox;
 use Czubehead\BootstrapForms\Traits\ChoiceInputTrait;
 use Czubehead\BootstrapForms\Traits\InputPromptTrait;
 use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
-use Nette\Forms\Controls\MultiSelectBox;
 
 
 /**
@@ -36,7 +37,7 @@ class MultiselectInput extends MultiSelectBox implements IValidationInput
 	/**
 	 * @inheritdoc
 	 */
-	public function getControl()
+	public function getControl(): Html
 	{
 		$select = parent::getControl()->setHtml(NULL);
 

@@ -39,7 +39,7 @@ class ButtonInput extends Button
 	 * @param null|string|Html $content
 	 * @return Html
 	 */
-	public function getControl($content = NULL)
+	public function getControl($content = NULL): Html
 	{
 		$btn = parent::getControl();
 		$btn->setName('button');

@@ -10,11 +10,10 @@
 namespace Czubehead\BootstrapForms\Inputs;
 
 
-use Czubehead\BootstrapForms\Traits\ChoiceInputTrait;
-use Czubehead\BootstrapForms\Traits\InputPromptTrait;
-use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
+use Nette\Utils\Html;
 use Nette\Forms\Controls\SelectBox;
-
+use Czubehead\BootstrapForms\Traits\ChoiceInputTrait;
+use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
 
 /**
  * Class SelectInput.
@@ -24,7 +23,6 @@ use Nette\Forms\Controls\SelectBox;
 class SelectInput extends SelectBox implements IValidationInput
 {
 	use ChoiceInputTrait;
-	use InputPromptTrait;
 	use StandardValidationTrait;
 
 	/**
@@ -41,7 +39,7 @@ class SelectInput extends SelectBox implements IValidationInput
 	/**
 	 * @inheritdoc
 	 */
-	public function getControl()
+	public function getControl(): Html
 	{
 		$select = parent::getControl()->setHtml(NULL);
 
@@ -49,9 +47,9 @@ class SelectInput extends SelectBox implements IValidationInput
 			'class'    => ['custom-select'],
 			'disabled' => $this->isControlDisabled(),
 		];
-		$options = $this->rawItems;
-		if (!empty($this->prompt)) {
-			$options = [NULL => $this->prompt] + $options;
+        $options = $this->rawItems;
+		if (!empty($this->getPrompt())) {
+            $options = [NULL => $this->getPrompt()] + $options;
 		}
 
 		$optList = $this->makeOptionList($options, function ($value) {
@@ -70,10 +68,10 @@ class SelectInput extends SelectBox implements IValidationInput
 	/**
 	 * @return bool
 	 */
-	public function isOk()
+	public function isOk(): bool
 	{
 		return $this->isDisabled()
-			|| $this->prompt !== null
+			|| $this->getPrompt() != false
 			|| $this->getValue() !== null
 			|| !$this->getOptions()
 			|| $this->control->size > 1;

@@ -14,6 +14,7 @@ use Czubehead\BootstrapForms\Enums\RendererOptions;
 use Czubehead\BootstrapForms\Traits\ChoiceInputTrait;
 use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
 use Nette\Forms\Controls\ChoiceControl;
+use Nette\Forms\Controls\RadioList;
 use Nette\Forms\Helpers;
 use Nette\Utils\Html;
 
@@ -22,17 +23,12 @@ use Nette\Utils\Html;
  * Class RadioInput. Lets user choose one out of multiple options.
  * @package Czubehead\BootstrapForms
  */
-class RadioInput extends ChoiceControl implements IValidationInput
+class RadioInput extends RadioList implements IValidationInput
 {
 	use ChoiceInputTrait;
 	use StandardValidationTrait {
 		showValidation as protected _rawShowValidation;
 	}
-
-	/**
-	 * @var Html
-	 */
-	private $container;
 
 	/**
 	 * @param  string|object
@@ -50,10 +46,10 @@ class RadioInput extends ChoiceControl implements IValidationInput
 	 * Generates control's HTML element.
 	 * @return Html
 	 */	
-	public function getControl()
+	public function getControl(): Html
 	{
 		// has to run
-		parent::getControl();
+		ChoiceControl::getControl();
 
 		$items = $this->getItems();
 		$container = $this->container;

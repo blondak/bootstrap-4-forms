@@ -14,7 +14,7 @@ use Czubehead\BootstrapForms\BootstrapUtils;
 use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
 use Nette\Forms\Controls\TextArea;
 use Nette\InvalidArgumentException;
-
+use Nette\Utils\Html;
 
 /**
  * Class TextAreaInput
@@ -64,7 +64,7 @@ class TextAreaInput extends TextArea implements IValidationInput, IAutocompleteI
 	/**
 	 * @inheritdoc
 	 */
-	public function getControl()
+	public function getControl(): Html
 	{
 		$control = parent::getControl();
 		BootstrapUtils::standardizeClass($control);
