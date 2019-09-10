@@ -33,8 +33,15 @@ class CheckboxInput extends Checkbox implements IValidationInput
 	 */
 	public function getControl(): Html
 	{
-		return self::makeCheckbox($this->getHtmlName(), $this->getHtmlId(), $this->translate($this->caption), $this->value, FALSE, $this->required,
-			$this->disabled, $this->getRules());
+		list($input, $label) = self::makeCheckbox($this->getHtmlName(), $this->getHtmlId(), $this->translate($this->caption), $this->value, FALSE, $this->required,
+            $this->disabled, $this->getRules());
+        $wrap = $this->getSeparatorPrototype();
+        if ($wrap->getName() === '') {
+            $wrap->setName('div');
+            $wrap->setAttribute('class', ['custom-control', 'custom-checkbox']);
+        }
+        $wrap->addHtml($input)->addHtml($label);
+        return $wrap;
 	}
 
 	/**
@@ -53,7 +60,6 @@ class CheckboxInput extends Checkbox implements IValidationInput
 		$name, $htmlId, $caption = NULL, $checked = FALSE, $value = FALSE, $required = FALSE,
 		$disabled = FALSE, $rules = NULL)
 	{
-		$label = Html::el('label', ['class' => ['custom-control', 'custom-checkbox']]);
 		$input = Html::el('input', [
 			'type'             => 'checkbox',
 			'class'            => ['custom-control-input'],
@@ -70,18 +76,12 @@ class CheckboxInput extends Checkbox implements IValidationInput
 			];
 		}
 
-		$label->addHtml($input);
-		$label->addHtml(
-			Html::el('label', [
-				'class' => ['custom-control-label'],
-				'for'   => $htmlId,
-			])->setText($caption)
-		);
+		$label = Html::el('label', [
+            'class' => ['custom-control-label'],
+            'for'   => $htmlId,
+        ])->setText($caption);
 
-		$line = Html::el('div');
-		$line->addHtml($label);
-
-		return $label;
+		return [$input, $label];
 	}
 
 	/**
@@ -96,5 +96,10 @@ class CheckboxInput extends Checkbox implements IValidationInput
 		$control->getChildren()[0] = $this->_rawShowValidation($control->getChildren()[0]);
 
 		return $control;
-	}
+    }
+    
+    public function setWrapperTag(string $tagName): void
+    {
+        $this->getSeparatorPrototype()->setName($tagName);
+    }
 }
