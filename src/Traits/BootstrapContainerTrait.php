@@ -79,7 +79,7 @@ trait BootstrapContainerTrait
 	 * @param array|null $items
 	 * @return CheckboxListInput
 	 */
-	public function addCheckboxList(string $name, ?string $label = null, ?array $items = null): CheckboxList
+	public function addCheckboxList(string $name, $label = null, ?array $items = null): CheckboxList
 	{
 		$comp = new CheckboxListInput($label, $items);
 		$this->addComponent($comp, $name);
