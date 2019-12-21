@@ -545,6 +545,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 		/** @noinspection PhpUndefinedMethodInspection */
 		/** @noinspection PhpUndefinedFieldInspection */
 		$pairHtml->id = $control->getOption(RendererOptions::id);
+		$pairHtml->style = $control->getOption(RendererOptions::style);
 
 		$labelHtml = $this->renderLabel($control);
 		if (!empty($labelHtml)) {

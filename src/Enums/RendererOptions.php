@@ -33,6 +33,10 @@ class RendererOptions
 	 */
 	const id = 'id';
 	/**
+	 * String. Custom style for container. Useful for usage with toggle(<id>).
+	 */
+	const style = 'style';
+	/**
 	 * String. Standard input description, a.ka. bootstrap Help text
 	 */
 	const description = 'description';
