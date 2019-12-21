@@ -91,6 +91,21 @@ class TextInput extends \Nette\Forms\Controls\TextInput implements IValidationIn
 		return $control;
 	}
 
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getLabel($caption = null): Html
+	{
+		$label =  parent::getLabel($caption);
+		if (!empty($this->getLabelPrototype()->getChildren())) {
+			foreach ($this->getLabelPrototype()->getChildren() as $child) {
+				$label->insert(null, $child);
+			}
+		}
+		return $label;
+	}
+
 	/**
 	 * @return string
 	 * @see TextInput::$placeholder
