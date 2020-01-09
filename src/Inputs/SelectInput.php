@@ -76,4 +76,18 @@ class SelectInput extends SelectBox implements IValidationInput
 			|| !$this->getOptions()
 			|| $this->control->size > 1;
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getLabel($caption = null): Html
+	{
+		$label =  parent::getLabel($caption);
+		if (!empty($this->getLabelPrototype()->getChildren())) {
+			foreach ($this->getLabelPrototype()->getChildren() as $child) {
+				$label->insert(null, $child);
+			}
+		}
+		return $label;
+	}
 }
