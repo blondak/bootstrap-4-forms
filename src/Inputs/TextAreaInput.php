@@ -76,4 +76,19 @@ class TextAreaInput extends TextArea implements IValidationInput, IAutocompleteI
 
 		return $control;
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getLabel($caption = null): Html
+	{
+		$label =  parent::getLabel($caption);
+		bdump('hello!');
+		if (!empty($this->getLabelPrototype()->getChildren())) {
+			foreach ($this->getLabelPrototype()->getChildren() as $child) {
+				$label->insert(null, $child);
+			}
+		}
+		return $label;
+	}
 }
