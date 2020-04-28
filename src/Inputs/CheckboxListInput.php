@@ -43,11 +43,15 @@ class CheckboxListInput extends CheckboxList implements IValidationInput
 		foreach ($this->items as $value => $caption) {
 			$line = CheckboxInput::makeCheckbox($this->getHtmlName(), $baseId . $c, $caption, $this->isValueSelected($value),
 				$value, FALSE, $this->isValueDisabled($value), $this->getRules());
-
-			$fieldset->addHtml($line);
+			
+			if (!is_array($line)) $line = [$line];
+			$checkboxWrap = Html::el('div', ['class' => 'custom-control custom-checkbox']);
+			array_walk($line, function($item) use ($checkboxWrap) {
+				$checkboxWrap->addHtml($item);
+			});
+			$fieldset->addHtml($checkboxWrap);
 			$c++;
 		}
-
 		return $fieldset;
 	}
 
