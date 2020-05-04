@@ -33,7 +33,7 @@ class SelectInput extends SelectBox implements IValidationInput
 	public function __construct($label = NULL, $items = NULL)
 	{
 		parent::__construct($label);
-		$this->setItems($items);
+		$this->setItems($items ?? []);
 	}
 
 	/**
