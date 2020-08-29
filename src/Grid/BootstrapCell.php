@@ -7,14 +7,15 @@
 namespace Czubehead\BootstrapForms\Grid;
 
 
+use LogicException;
+use Nette\Utils\Html;
+use Nette\SmartObject;
+use Nette\Forms\IControl;
+use Nette\ComponentModel\IComponent;
 use Czubehead\BootstrapForms\BootstrapRenderer;
 use Czubehead\BootstrapForms\Enums\RendererConfig;
+use Czubehead\BootstrapForms\Enums\RendererOptions;
 use Czubehead\BootstrapForms\Traits\BootstrapContainerTrait;
-use LogicException;
-use Nette\ComponentModel\IComponent;
-use Nette\Forms\IControl;
-use Nette\SmartObject;
-use Nette\Utils\Html;
 
 
 /**
@@ -104,6 +105,7 @@ class BootstrapCell
 		$element->class[] = $this->createClass();
 
 		foreach ($this->childControls as $control) {
+			if ($control->getOption(RendererOptions::_rendered)) continue;
 			$pairHtml = $renderer->renderPair($control);
 			$element->addHtml($pairHtml);
 		}
