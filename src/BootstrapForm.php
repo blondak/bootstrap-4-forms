@@ -57,9 +57,9 @@ class BootstrapForm extends Form
 	 * BootstrapForm constructor.
 	 * @param int|IContainer|null $container
 	 */
-	public function __construct($container = NULL)
+	public function __construct($container = NULL, string $name = null)
 	{
-		parent::__construct($container);
+		parent::__construct($container, $name);
 		$this->setRenderer(new BootstrapRenderer);
 
 		$prototype = Html::el('form', [
