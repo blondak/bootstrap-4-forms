@@ -62,13 +62,6 @@ class BootstrapForm extends Form
 		parent::__construct($container, $name);
 		$this->setRenderer(new BootstrapRenderer);
 
-		$prototype = Html::el('form', [
-			'action' => '',
-			'method' => self::POST,
-			'class'  => [],
-		]);
-		$this->elementPrototype = $prototype;
-
 		/**
 		 * @param BootstrapForm $form
 		 */
@@ -79,6 +72,14 @@ class BootstrapForm extends Form
 
 	public function getElementPrototype(): Html
 	{
+		if (!$this->elementPrototype) {
+			$prototype = Html::el('form', [
+				'action' => '',
+				'method' => self::POST,
+				'class'  => [],
+			]);
+			$this->elementPrototype = $prototype;
+		}
 		return $this->elementPrototype;
 	}
 
