@@ -17,6 +17,8 @@ use Czubehead\BootstrapForms\Enums\RenderMode;
 use Czubehead\BootstrapForms\Grid\BootstrapRow;
 use Czubehead\BootstrapForms\Inputs\IValidationInput;
 use Nette;
+use Nette\Forms\Controls\BaseControl;
+use Nette\SmartObject;
 use Nette\Utils\Html;
 
 
@@ -30,10 +32,10 @@ use Nette\Utils\Html;
  * @property bool       $groupHidden       if true, hidden fields will be grouped at the end. If false,
  *           hidden fields are placed where they were added. Default is true.
  */
-class BootstrapRenderer implements Nette\Forms\IFormRenderer
+class BootstrapRenderer implements Nette\Forms\FormRenderer
 {
-	use Nette\SmartObject;
-
+	use SmartObject;
+	
 	const defaultLabelColumns = 3;
 	const defaultControlColumns = 9;
 
@@ -351,7 +353,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 			/** @noinspection PhpUndefinedFieldInspection */
 			$el->action = str_replace("?$query", '', $el->action);
 			$s = '';
-			foreach (preg_split('#[;&]#', $query, NULL, PREG_SPLIT_NO_EMPTY) as $param) {
+			foreach (preg_split('#[;&]#', $query, flags: PREG_SPLIT_NO_EMPTY) as $param) {
 				$parts = explode('=', $param, 2);
 				$name = urldecode($parts[0]);
 				if (!isset($this->form[ $name ])) {
@@ -381,7 +383,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 			}
 
 			//region getting container
-			$container = $group->getOption(RendererOptions::container, NULL);
+			$container = $group->getOption(RendererOptions::container);
 			if (is_string($container)) {
 				$container = $this->configElem(Cnf::group, Html::el($container));
 			} elseif ($container instanceof Html) {
@@ -435,11 +437,12 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 
 	/**
 	 * Renders 'control' part of visual row of controls.
-	 * @param \Nette\Forms\IControl $control
+	 * @param \Nette\Forms\Control $control
 	 * @return string
 	 */
-	public function renderControl(Nette\Forms\IControl $control)
+	public function renderControl(Nette\Forms\Control $control)
 	{
+		/** @var BaseControl $control */
 		/** @noinspection PhpUndefinedMethodInspection */
 		$controlHtml = $control->getControl();
 		/** @noinspection PhpUndefinedMethodInspection */
@@ -468,7 +471,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 
 		// note that these are NOT form groups, these are groups specified to group
 		foreach ($parent->getControls() as $control) {
-			if ($control->getOption(RendererOptions::_rendered, FALSE)) {
+			if ($control->getOption(RendererOptions::_rendered)) {
 				continue;
 			}
 
@@ -507,11 +510,12 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 
 	/**
 	 * Renders 'label' part of visual row of controls.
-	 * @param \Nette\Forms\IControl $control
+	 * @param \Nette\Forms\Control $control
 	 * @return Html
 	 */
-	public function renderLabel(Nette\Forms\IControl $control)
+	public function renderLabel(Nette\Forms\Control $control)
 	{
+		/** @var BaseControl $control */
 		if ($control->caption === null) return Html::el();
 		/** @noinspection PhpUndefinedMethodInspection */
 		$controlLabel = $control->getLabel();
@@ -536,11 +540,12 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 
 	/**
 	 * Renders single visual row.
-	 * @param \Nette\Forms\IControl $control
+	 * @param \Nette\Forms\Control $control
 	 * @return string
 	 */
-	public function renderPair(Nette\Forms\IControl $control)
+	public function renderPair(Nette\Forms\Control $control)
 	{
+		/** @var BaseControl|Nette\Forms\Control $control */
 		$pairHtml = $this->configElem(Cnf::pair);
 		/** @noinspection PhpUndefinedMethodInspection */
 		/** @noinspection PhpUndefinedFieldInspection */
@@ -639,11 +644,12 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 
 	/**
 	 * Renders control description (help text)
-	 * @param Nette\Forms\IControl $control
+	 * @param Nette\Forms\Control $control
 	 * @return Html|null
 	 */
-	protected function renderDescription(Nette\Forms\IControl $control)
+	protected function renderDescription(Nette\Forms\Control $control)
 	{
+		/** @var BaseControl $control */
 		/** @noinspection PhpUndefinedMethodInspection */
 		$description = $control->getOption(RendererOptions::description);
 		if (is_string($description)) {
@@ -676,7 +682,7 @@ class BootstrapRenderer implements Nette\Forms\IFormRenderer
 		$showFeedback = FALSE;
 		$messages = [];
 
-		if ($control instanceof Nette\Forms\IControl) {
+		if ($control instanceof Nette\Forms\Control) {
 			// specific control
 
 			if ($control->hasErrors()) {

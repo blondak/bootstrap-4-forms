@@ -12,7 +12,7 @@ namespace Czubehead\BootstrapForms\Traits;
 
 use Nette\InvalidArgumentException;
 use Nette\NotSupportedException;
-
+use Stringable;
 
 /**
  * Trait InputPromptTrait.
@@ -30,7 +30,7 @@ trait InputPromptTrait
 	/**
 	 * @return null|string
 	 */
-	public function getPrompt()
+	public function getPrompt(): string|Stringable|false
 	{
 		return $this->prompt;
 	}
@@ -40,7 +40,7 @@ trait InputPromptTrait
 	 * @param null|string $prompt
 	 * @return static
 	 */
-	public function setPrompt($prompt)
+	public function setPrompt(string|Stringable|false $prompt)
 	{
 		if (empty($prompt)) {
 			return $this;

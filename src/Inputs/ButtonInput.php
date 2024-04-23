@@ -13,7 +13,7 @@ namespace Czubehead\BootstrapForms\Inputs;
 use Czubehead\BootstrapForms\Traits\BootstrapButtonTrait;
 use Nette\Forms\Controls\Button;
 use Nette\Utils\Html;
-
+use Stringable;
 
 /**
  * Class ButtonInput.
@@ -39,11 +39,11 @@ class ButtonInput extends Button
 	 * @param null|string|Html $content
 	 * @return Html
 	 */
-	public function getControl($content = NULL): Html
+	public function getControl(string|Stringable|null $content = NULL): Html
 	{
 		$btn = parent::getControl();
 		$btn->setName('button');
-		$btn->setHtml($content === NULL ? $this->caption : $content);
+		$btn->setHtml($content ?? (string) $this->caption);
 		$this->addBtnClass($btn);
 
 		return $btn;

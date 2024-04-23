@@ -13,6 +13,7 @@ use Czubehead\BootstrapForms\Traits\AddRowTrait;
 use Czubehead\BootstrapForms\Traits\BootstrapContainerTrait;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IContainer;
+use Nette\Forms\FormRenderer;
 use Nette\Forms\IFormRenderer;
 use Nette\InvalidArgumentException;
 use Nette\Utils\Html;
@@ -75,7 +76,7 @@ class BootstrapForm extends Form
 		if (!$this->elementPrototype) {
 			$prototype = Html::el('form', [
 				'action' => '',
-				'method' => self::POST,
+				'method' => self::Post,
 				'class'  => [],
 			]);
 			$this->elementPrototype = $prototype;
@@ -86,16 +87,16 @@ class BootstrapForm extends Form
 	/**
 	 * @return \Czubehead\BootstrapForms\BootstrapRenderer|\Nette\Forms\IFormRenderer
 	 */
-	public function getRenderer(): IFormRenderer
+	public function getRenderer(): FormRenderer
 	{
 		return parent::getRenderer();
 	}
 
 	/**
-	 * @param IFormRenderer $renderer
+	 * @param ?FormRenderer $renderer
 	 * @return static
 	 */
-	public function setRenderer(IFormRenderer $renderer = NULL)
+	public function setRenderer(?FormRenderer $renderer = NULL): static
 	{
 		if (!$renderer instanceof BootstrapRenderer) {
 			throw new InvalidArgumentException('Must be a BootstrapRenderer');
@@ -170,6 +171,7 @@ class BootstrapForm extends Form
 		$this->isAjax = $isAjax;
 
 		BootstrapUtils::standardizeClass($this->getElementPrototype());
+		/** @var array */
 		$prototypeClass = $this->getElementPrototype()->class;
 
 		$present = in_array($this->ajaxClass, $prototypeClass);

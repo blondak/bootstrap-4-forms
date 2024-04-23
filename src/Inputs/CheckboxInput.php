@@ -35,7 +35,7 @@ class CheckboxInput extends Checkbox implements IValidationInput
 	{
 		list($input, $label) = self::makeCheckbox($this->getHtmlName(), $this->getHtmlId(), $this->translate($this->caption), $this->value, FALSE, $this->required,
             $this->disabled, $this->getRules());
-        $wrap = $this->getSeparatorPrototype();
+        $wrap = $this->getContainerPrototype();
         if ($wrap->getName() === '') {
             $wrap->setName('div');
             $wrap->setAttribute('class', ['custom-control', 'custom-checkbox']);
@@ -100,6 +100,6 @@ class CheckboxInput extends Checkbox implements IValidationInput
     
     public function setWrapperTag(string $tagName): void
     {
-        $this->getSeparatorPrototype()->setName($tagName);
+        $this->getContainerPrototype()->setName($tagName);
     }
 }

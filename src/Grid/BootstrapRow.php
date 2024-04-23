@@ -12,6 +12,7 @@ use Czubehead\BootstrapForms\Traits\FakeControlTrait;
 use Nette\ComponentModel\IComponent;
 use Nette\ComponentModel\IContainer;
 use Nette\Forms\Container;
+use Nette\Forms\Control;
 use Nette\Forms\IControl;
 use Nette\InvalidArgumentException;
 use Nette\SmartObject;
@@ -30,7 +31,7 @@ use Nette\Utils\Html;
  *                additional properties.
  * @property-read string          $name             name of component
  */
-class BootstrapRow implements IComponent, IControl
+class BootstrapRow implements IComponent, Control
 {
 	use SmartObject;
 	use FakeControlTrait;
@@ -191,12 +192,13 @@ class BootstrapRow implements IComponent, IControl
 
 	/**
 	 * Sets the container
-	 * @param Container|NULL $parent
+	 * @param ?Container $parent
 	 * @param null           $name ignored
 	 */
-	public function setParent(IContainer $parent = NULL, $name = NULL)
+	public function setParent(?IContainer $parent, ?string $name = NULL): static
 	{
 		$this->container = $parent;
+		return $this;
 	}
 
 	/**
@@ -205,9 +207,9 @@ class BootstrapRow implements IComponent, IControl
 	 * @param null   $default
 	 * @return mixed|null
 	 */
-	public function getOption($option, $default = NULL)
+	public function getOption($option)
 	{
-		return isset($this->options[ $option ]) ? $this->options[ $option ] : $default;
+		return $this->options[$option] ?? null;
 	}
 
 	/**

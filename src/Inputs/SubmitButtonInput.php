@@ -26,7 +26,7 @@ class SubmitButtonInput extends SubmitButton
 	{
 		$control = parent::getControl($caption);
 		$control->setName('button');
-		$control->addHtml($caption ?? $this->caption);
+		$control->addHtml($caption ?? (string) $this->caption);
 		$this->addBtnClass($control);
 
 		return $control;

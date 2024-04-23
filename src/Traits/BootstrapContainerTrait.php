@@ -35,7 +35,7 @@ use Nette\Forms\Controls\TextInput as NetteTextInput;
 use Nette\Forms\Controls\UploadControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
-
+use Stringable;
 
 /**
  * Trait BootstrapContainerTrait.
@@ -51,7 +51,7 @@ trait BootstrapContainerTrait
 	 * @param string|null      $btnClass secondary button class (primary is 'btn')
 	 * @return ButtonInput
 	 */
-	public function addButton(string $name, $content = NULL): Button
+	public function addButton(string $name, string|Stringable|null $content = NULL): Button
 	{
 		$comp = new ButtonInput($content);
 		$comp->setBtnClass('btn-secondary');    // default value
@@ -65,7 +65,7 @@ trait BootstrapContainerTrait
 	 * @param null   $caption
 	 * @return CheckboxInput
 	 */
-	public function addCheckbox(string $name, $caption = null): Checkbox
+	public function addCheckbox(string $name, string|Stringable|null $caption = null): Checkbox
 	{
 		$comp = new CheckboxInput($caption);
 		$this->addComponent($comp, $name);
@@ -79,7 +79,7 @@ trait BootstrapContainerTrait
 	 * @param array|null $items
 	 * @return CheckboxListInput
 	 */
-	public function addCheckboxList(string $name, $label = null, ?array $items = null): CheckboxList
+	public function addCheckboxList(string $name, string|Stringable|null $label = null, ?array $items = null): CheckboxList
 	{
 		$comp = new CheckboxListInput($label, $items);
 		$this->addComponent($comp, $name);
@@ -93,7 +93,7 @@ trait BootstrapContainerTrait
 	 * @param string $name
 	 * @return BootstrapContainer
 	 */
-	public function addContainer($name): Container
+	public function addContainer(string|int $name): Container
 	{
 		$control = new BootstrapContainer;
 		$control->currentGroup = $this->currentGroup;
@@ -111,7 +111,7 @@ trait BootstrapContainerTrait
 	 * @param string $label label
 	 * @return DateTimeInput
 	 */
-	public function addDateTime($name, $label)
+	public function addDateTimeInput($name, $label)
 	{
 		$comp = new DateTimeInput($label);
 		$this->addComponent($comp, $name);
@@ -121,13 +121,13 @@ trait BootstrapContainerTrait
 
 	/**
 	 * @param      $name
-	 * @param null $label
+	 * @param string|Stringable|null $label
 	 * @return TextInput
 	 */
-	public function addEmail(string $name, $label = NULL): NetteTextInput
+	public function addEmail(string $name, string|Stringable|null $label = NULL): NetteTextInput
 	{
 		return $this->addText($name, $label)
-					->addRule(Form::EMAIL);
+					->addRule(Form::Email);
 	}
 
 	/**
@@ -143,23 +143,23 @@ trait BootstrapContainerTrait
 
 	/**
 	 * @param string $name
-	 * @param string $label
+	 * @param  string|Stringable|null  $label
 	 * @return TextInput
 	 */
-	public function addInteger(string $name, $label = NULL): NetteTextInput
+	public function addInteger(string $name, string|Stringable|null $label = NULL): NetteTextInput
 	{
 		return $this->addText($name, $label)
-					->addRule(Form::INTEGER);
+					->addRule(Form::Integer);
 	}
 
 	/**
 	 * @param string     $name
-	 * @param null       $label
+	 * @param string|Stringable|null $label
 	 * @param array|null $items
 	 * @param null       $size
 	 * @return MultiselectInput
 	 */
-	public function addMultiSelect(string $name, $label = NULL, ?array $items = NULL, ?int $size = NULL): MultiSelectBox
+	public function addMultiSelect(string $name, string|Stringable|null $label = null, ?array $items = NULL, ?int $size = NULL): MultiSelectBox
 	{
 		$comp = new MultiselectInput($label, $items);
 		if ($size !== NULL) {
@@ -175,7 +175,7 @@ trait BootstrapContainerTrait
 	 * @param string $label
 	 * @return UploadInput
 	 */
-	public function addMultiUpload(string $name, $label = NULL): UploadControl
+	public function addMultiUpload(string $name, string|Stringable|null $label = NULL): UploadControl
 	{
 		return $this->addUpload($name, $label, TRUE);
 	}
@@ -187,10 +187,10 @@ trait BootstrapContainerTrait
 	 * @param null   $maxLength
 	 * @return TextInput
 	 */
-	public function addPassword(string $name, $label = NULL, ?int $cols = NULL, ?int $maxLength = NULL): NetteTextInput
+	public function addPassword(string $name, string|Stringable|null $label = NULL, ?int $cols = NULL, ?int $maxLength = NULL): NetteTextInput
 	{
 		return $this->addText($name, $label, $cols, $maxLength)
-					->setType('password');
+					->setHtmlType('password');
 	}
 
 	public function addRadioList(string $name, $label = NULL, ?array $items = NULL): RadioList
@@ -208,7 +208,7 @@ trait BootstrapContainerTrait
 	 * @param null   $size ignore
 	 * @return SelectInput
 	 */
-	public function addSelect(string $name, $label = NULL, ?array $items = NULL, ?int $size = NULL): SelectBox
+	public function addSelect(string $name, string|Stringable|null $label = NULL, ?array $items = NULL, ?int $size = NULL): SelectBox
 	{
 		$comp = new SelectInput($label, $items);
 		if ($size !== NULL) {
@@ -225,7 +225,7 @@ trait BootstrapContainerTrait
 	 * @param string $btnClass secondary button class (primary is 'btn')
 	 * @return SubmitButtonInput
 	 */
-	public function addSubmit(string $name, $caption = NULL): SubmitButton
+	public function addSubmit(string $name, string|Stringable|null $caption = NULL): SubmitButton
 	{
 		$comp = new SubmitButtonInput($caption);
 		$comp->setBtnClass('btn-primary');
@@ -241,7 +241,7 @@ trait BootstrapContainerTrait
 	 * @param null   $maxLength ignored
 	 * @return TextInput
 	 */
-	public function addText(string $name, $label = NULL, ?int $cols = NULL, ?int $maxLength = NULL): NetteTextInput
+	public function addText(string $name, string|Stringable|null $label = NULL, ?int $cols = NULL, ?int $maxLength = NULL): NetteTextInput
 	{
 		$comp = new TextInput($label);
 		if ($cols !== NULL) {
@@ -262,7 +262,7 @@ trait BootstrapContainerTrait
 	 * @param null   $rows ignored
 	 * @return TextAreaInput
 	 */
-	public function addTextArea(string $name, $label = NULL, ?int $cols = NULL, ?int $rows = NULL): TextArea
+	public function addTextArea(string $name, string|Stringable|null $label = NULL, ?int $cols = NULL, ?int $rows = NULL): TextArea
 	{
 		$comp = new TextAreaInput($label);
 		if ($cols !== NULL) {
@@ -283,7 +283,7 @@ trait BootstrapContainerTrait
 	 * @param bool   $multiple
 	 * @return UploadInput
 	 */
-	public function addUpload(string $name, $label = NULL, bool $multiple = FALSE): UploadControl
+	public function addUpload(string $name, string|Stringable|null $label = NULL, bool $multiple = FALSE): UploadControl
 	{
 		$comp = new UploadInput($label, $multiple);
 		$this->addComponent($comp, $name);

@@ -7,16 +7,14 @@
 namespace Czubehead\BootstrapForms\Grid;
 
 
-use LogicException;
 use Nette\Utils\Html;
 use Nette\SmartObject;
-use Nette\Forms\IControl;
 use Nette\ComponentModel\IComponent;
 use Czubehead\BootstrapForms\BootstrapRenderer;
 use Czubehead\BootstrapForms\Enums\RendererConfig;
 use Czubehead\BootstrapForms\Enums\RendererOptions;
 use Czubehead\BootstrapForms\Traits\BootstrapContainerTrait;
-
+use Nette\Forms\Controls\BaseControl;
 
 /**
  * Class BootstrapCell.
@@ -24,7 +22,7 @@ use Czubehead\BootstrapForms\Traits\BootstrapContainerTrait;
  * Only one component can be present.
  * @package Czubehead\BootstrapForms\Grid
  * @property-read int  $numOfColumns     		Number of Bootstrap columns to occupy
- * @property-read IControl[] $childControls     Nested child control if any
+ * @property-read BaseControl[] $childControls     Nested child control if any
  * @property-read Html $elementPrototype 		the Html div that will be rendered. You may define additional
  *                properties.
  */
@@ -46,7 +44,7 @@ class BootstrapCell
 	 */
 	protected $numOfColumns;
 	/**
-	 * @var IControl[]
+	 * @var BaseControl[]
 	 */
 	protected $childControls = [];
 	/**

@@ -14,6 +14,7 @@ use Nette\Utils\Html;
 use Nette\Forms\Controls\SelectBox;
 use Czubehead\BootstrapForms\Traits\ChoiceInputTrait;
 use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
+use Stringable;
 
 /**
  * Class SelectInput.
@@ -80,7 +81,7 @@ class SelectInput extends SelectBox implements IValidationInput
 	/**
 	 * @inheritdoc
 	 */
-	public function getLabel($caption = null): Html
+	public function getLabel(string|Stringable|null $caption = null)
 	{
 		$label =  parent::getLabel($caption);
 		if (!empty($this->getLabelPrototype()->getChildren())) {

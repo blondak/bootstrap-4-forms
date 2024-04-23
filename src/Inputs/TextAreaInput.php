@@ -15,6 +15,7 @@ use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
 use Nette\Forms\Controls\TextArea;
 use Nette\InvalidArgumentException;
 use Nette\Utils\Html;
+use Stringable;
 
 /**
  * Class TextAreaInput
@@ -80,7 +81,7 @@ class TextAreaInput extends TextArea implements IValidationInput, IAutocompleteI
 	/**
 	 * @inheritdoc
 	 */
-	public function getLabel($caption = null): Html
+	public function getLabel(string|Stringable|null $caption = null)
 	{
 		$label =  parent::getLabel($caption);
 		if (!empty($this->getLabelPrototype()->getChildren())) {

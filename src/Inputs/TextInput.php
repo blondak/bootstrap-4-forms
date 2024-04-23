@@ -13,6 +13,7 @@ use Czubehead\BootstrapForms\BootstrapUtils;
 use Czubehead\BootstrapForms\Traits\StandardValidationTrait;
 use Nette\InvalidArgumentException;
 use Nette\Utils\Html;
+use Stringable;
 
 /**
  * Class TextInput
@@ -95,7 +96,7 @@ class TextInput extends \Nette\Forms\Controls\TextInput implements IValidationIn
 	/**
 	 * @inheritdoc
 	 */
-	public function getLabel($caption = null): Html
+	public function getLabel(string|Stringable|null $caption = null)
 	{
 		$label =  parent::getLabel($caption);
 		if (!empty($this->getLabelPrototype()->getChildren())) {
